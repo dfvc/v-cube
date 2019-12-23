@@ -1,28 +1,70 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div id="app">
+        <section class="cubes-holder">
+            <v-cube 
+                v-for="(cube, index) in cubes"
+                :key="index"
+                :edge-size="cube.edgeSize"
+                :show-edge="cube.showEdge"
+                :rotation-duration="cube.rotationDuration"
+                :rotation-step="cube.rotationStep"
+                :auto-rotate="cube.autoRotate"
+                :auto-rotate-delay-factor="cube.autoRotateDelayFactor"
+            />
+        </section>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+    import VCube from './components/VCube.vue'
 
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
-}
+    export default {
+        name: 'app',
+
+        components: {
+            VCube
+        },
+
+        data() {
+            return {
+                cubes: [
+                    {
+                        edgeSize: 100, 
+                        showEdge: false, 
+                        rotationDuration: 300,
+                        rotationStep: 90,
+                        autoRotate: true, 
+                        autoRotateDelayFactor: 3,
+                    }
+                ]
+            }
+        },
+    }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
+<style lang="scss">
+    * {
+        box-sizing: border-box;
+    }
+
+    html, 
+    body {
+        height: 100%;
+    }
+
+    body {
+        background-color: $primary-light;
+        font-family: sans-serif;
+    }
+
+    .cubes-holder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        max-width: 1024px;
+    }
 </style>
+
